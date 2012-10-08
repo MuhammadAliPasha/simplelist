@@ -41,7 +41,7 @@ scripts and content different than only column value.
 Quick use
 
 ```php
-$param=new SimpleList_Param();
+$param=new SimpleList\Param();
 $param->query = DB::table('banner');//query 
 $param->columns=array('id','name');//columns on list
 
@@ -52,7 +52,7 @@ return View::make('admin::banner.index')->with(array('list'=>SimpleList::generat
 
 Simple list use
 ```php
-$param=new SimpleList_Param();
+$param=new SimpleList\Param();
 $param->query = DB::table('banner');//query 
 $param->columns=array('id','name');//columns on list
 $param->sort = true;//is sorting enabled
@@ -140,7 +140,7 @@ return array(
 SimpleList Param file:
 ```php
 
-	$param = new \SimpleList\Column\Param();
+	$param = new \SimpleList\Param();
 	
 	$param->sort=false;// set is sorting
 	$param->default_sort_col=false;//set default sort col
