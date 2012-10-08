@@ -27,11 +27,28 @@ return array(
 * Sorting and enable,disable sort in every column
 * Search by many or one column
 * Adding action buttons, possibility to add button with own attributes 
-* Values of columns can be created from many columns and html tags ex. <img src="path/@id/file.@ext" />
+* Values of columns can be created from many columns and html tags ex. img src="path/@id/file.@ext"
 * Set own language file for column names
 * Full customization possibility
 
+Content standards for column content and button action is string with @ tag for columns. You can set
+which columns will be in this string. You can use it for images, dom attributes, js
+scripts and content different than only column value.
+
+
 ### Usage ###
+
+Quick use
+
+```php
+$param=new SimpleList_Param();
+$param->query = DB::table('banner');//query 
+$param->columns=array('id','name');//columns on list
+
+return View::make('admin::banner.index')->with(array('list'=>SimpleList::generate($param)));
+
+```
+
 
 Simple list use
 ```php
