@@ -35,7 +35,7 @@ class Column{
 	 */
 	function __construct($name,$content=false,$search=false,$sort=true,$nodb=false)
 	{
-		$this->orginal_name=$name;//name used by user and sql
+		$this->orginal_name=$this->parse($name,false);//name used by user and sql
 		$this->db=$name;//this is parsed by parseDb and have only column name without as and dots
 		$this->content=$content;
 		$this->nodb=$nodb;
@@ -47,7 +47,7 @@ class Column{
 	
 	static function createByParam(\SimpleList\Column\Param $param)
 	{
-		$obj=new Column($param->db,$param->content,$param->search,$param->sort,$param->nodb);
+		$obj=new Column($param->name,$param->content,$param->search,$param->sort,$param->nodb);
 		return $obj; 
 	}
 	
@@ -59,18 +59,20 @@ class Column{
 	/**
 	 * removes dots and as words, gets only column names
 	 */
-	private function parse($column)
+	private function parse($column ,$dot=true)
 	{
 		$pos_as=strpos($column,'as');
 		
 		if ($pos_as===false)//no as in name
 		{
-		
-			$pos_dot=strpos($column,'.');
-			if ($pos_dot!==false)
+			if ($dot)//remove table name before .
 			{
-				//we have dot so we get only column without table name
-				return substr($column, $pos_dot+1);
+				$pos_dot=strpos($column,'.');
+				if ($pos_dot!==false)
+				{
+					//we have dot so we get only column without table name
+					return substr($column, $pos_dot+1);
+				}
 			}	
 		}else
 			{
@@ -80,6 +82,8 @@ class Column{
 		
 		return $column;
 	}
+	
+	
 	
 	public function generateContent($row)
 	{

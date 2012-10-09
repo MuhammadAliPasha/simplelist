@@ -54,7 +54,7 @@ class SimpleList{
 		
 		$colarr=self::_columnsParse($param->columns);
 		
-		$param->dbcolumns=$colarr['db'];
+		$param->dbcolumns=array_merge($colarr['db'],$param->extended_columns);//merge extended columns with normal columns
 		$param->columns=$colarr['norm'];
 		
 		if ($param->search_cols)

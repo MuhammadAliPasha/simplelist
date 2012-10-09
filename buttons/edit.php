@@ -23,10 +23,10 @@ use URI;
 
 class Edit extends Button{
 	
-	function __construct($pk='id')
+	function __construct($controller)
 	{
 		$this->method='edit';
-		parent::__construct($pk);
+		parent::__construct($controller);
 		
 	}
 	

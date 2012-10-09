@@ -90,7 +90,7 @@ Advanced use
  * if we have complex column we create it by param
  */
 $cparam = new \SimpleList\Column\Param();
-$cparam->db = 'thumbnail_ext'; //column in db
+$cparam->name = 'thumbnail_ext'; //column in db
 $cparam->sort = false; //no sorting by this column
 $cparam->content = '<img src="'.Config::get('admin::video.thumbnail_save_path').'/@id.@thumbnail_ext" />'; //comtent @name will be name column in current row
 $img = SimpleList\Column::createByParam($cparam);

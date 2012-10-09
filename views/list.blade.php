@@ -13,8 +13,8 @@
     	<th>
     		@if ($param->sort && $column->sort)
     		<a 
-    		@if ($param->sorted_now==$column->db)class="simplelist_sorted" @endif 
-    		href="/{{URI::current()}}?sort={{$column->db}}@if ($param->sorted_now==$column->db)&sorttype={{$param->sorted_type}}@endif{{$param->sort_append}}" >
+    		@if ($param->sorted_now==$column->orginal_name)class="simplelist_sorted" @endif 
+    		href="/{{URI::current()}}?sort={{$column->orginal_name}}@if ($param->sorted_now==$column->orginal_name)&sorttype={{$param->sorted_type}}@endif{{$param->sort_append}}" >
     		@endif
     		<span>{{__($param->bundle.'::'.$param->lang_filename.'.'.$column->orginal_name)}}</span>
     		@if ($param->sort && $column->sort)

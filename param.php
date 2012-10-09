@@ -37,7 +37,9 @@ class Param{
 	public $lang_filename;
 	public $span_class;
 	public $td_class;
-
+	
+	public $extended_columns=array();//columns not existing on list but existing in query
+	
 	public $search_class;
 	
 	public function __construct()

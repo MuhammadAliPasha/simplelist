@@ -20,15 +20,15 @@
 namespace SimpleList\Buttons;
 use Config;
 use SimpleList\Button as Butt;
-use URI;
+use URL;
 
 abstract class Button extends Butt{
 	
-	function __construct($pk='id')
+	function __construct($controller,$pk='id')
 	{
 		parent::__construct();
 		
-		$this->action='/'.URI::current().'/'.$this->method.'/'.$pk.'/@'.$pk;
+		$this->action=URL::to_action($controller.'/'.$this->method).'/@'.$pk;
 		$this->name=__('simplelist::simplelist.'.$this->method);
 	}
 	
