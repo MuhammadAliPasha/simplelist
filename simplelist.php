@@ -91,12 +91,25 @@ class SimpleList{
 	}
 	
 	/**
+	 * parsing array to url
+	 */
+	static function _parseToUrl($appends)
+	{
+		$url="";
+		foreach ($appends as $key => $value) {
+			$url.='&'.$key.'='.$value;
+		}
+		
+		return $url;
+	}
+	
+	/**
 	 * it sets current URI to sort and search urls
 	 */
 	static function setUrlAppends($param,$rows)
 	{
-		$sort_append="";
-		$append=array();
+		$sort_append=static::_parseToUrl($param->url_appends);
+		$append=$param->url_appends;
 		if ($param->sorted_now)
 		{
 			$append=array_merge($append,array('sort' => $param->sorted_now,'sorttype'=>Input::get('sorttype')));
