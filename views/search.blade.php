@@ -13,7 +13,7 @@
 		</select>
 	</span>
 	<span class="{{$param->span_class}}">
-		<input name="s_value" value="{{$s_value}}" />
+		<input type="text" name="s_value" value="{{$s_value}}" />
 	</span>
 	@else
 	<span class="{{$param->span_class}}">
