@@ -41,6 +41,7 @@ class Param{
 	
 	
 	public $extended_columns=array();//columns not existing on list but existing in query
+	public $dictionary=array(); //dictninary are arrays to use as # in column content
 	
 	public $search_class;
 	

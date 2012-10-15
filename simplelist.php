@@ -32,8 +32,13 @@ use Input;
 class SimpleList{
 	
 	static $sorttypes=array('desc','asc');
+	static $param=false;
 	
 	
+	static function getParam()
+	{
+		return static::$param;
+	}
 	/**
 	 * generates view with rows, buttons and columns
 	 */
@@ -49,6 +54,9 @@ class SimpleList{
 	 */
 	static function make(Param $param)
 	{
+		
+		static::$param=$param;//set Param
+		
 		if (count($param->columns)==0)
 		throw new Exception ('No columns defined!');
 		

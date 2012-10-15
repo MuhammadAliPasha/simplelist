@@ -53,6 +53,35 @@ class Parser{
 			$i++;
 		}
 		
+		//ok we have changed values to from @ but we if we have dictionaries with # we get their values
+		
+		preg_match_all("/\#([A-Za-z_0-9]+)\(([A-Za-z_0-9]+)\)/",$content,$matches);
+		$names=$matches[2];
+		$dics_names=$matches[1];
+		$matches=$matches[0];
+		
+		$size=count($matches);
+		
+		
+		if ($size==0)
+		return $content;
+		
+		$dicts=\SimpleList::getParam()->dictionary;
+		
+		if (count($dicts)==0)
+		return $content;
+		
+		
+		$i=0;
+		while ($i<$size)
+		{
+			$name=$names[$i];
+			$dic_name=$dics_names[$i];
+			$content=str_replace($matches[$i], $dicts[$dic_name][$name], $content);
+			$i++;
+		}
+		
+		
 		return $content;
 	}
 	
