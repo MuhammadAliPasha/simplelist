@@ -88,9 +88,15 @@ class Column{
 	public function generateContent($row)
 	{
 		$name=$this->db;
-		if (!$this->content)
-		return $row->$name;
-		
+		if (!$this->content){
+				
+			if ($row->$name)
+			return $row->$name;
+			else
+				return __(\Simplelist::getParam()->bundle.'::'.\Simplelist::getParam()->lang_filename.'.null');//if no value
+			
+			}		
+					
 		$content=$this->content;
 		
 		$content=Parser::parse($content,$row);

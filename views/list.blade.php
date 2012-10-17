@@ -38,7 +38,7 @@
     	@if ($param->buttons)
 	    	<td class="{{$param->td_class}}">
 	    	@foreach ($param->buttons as $button)
-		    	<{{$button->element}} class="{{$button->class}}" 
+		    	<{{$button->element}} class="{{$button->generateClass($row)}}" 
 		    	@if ($button->action) 
 		    	{{$button->action_attr}}='{{$button->generateAction($row)}}' 
 		    	@endif>

@@ -45,4 +45,10 @@ class Button{
 		return $val?$val:$this->action;
 	}
 	
+	function generateClass($row)
+	{
+		$val=Parser::parse($this->class, $row);
+		return $val?$val:$this->class;
+	}
+	
 }

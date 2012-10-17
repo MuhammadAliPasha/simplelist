@@ -23,5 +23,6 @@ return array(
 'delete'=>"Usuń",
 'search'=>"Szukaj",
 'no_results'=>'Brak wyników',
-'options'=>'Opcje'
+'options'=>'Opcje',
+'null'=>'Brak wartości'
 );
