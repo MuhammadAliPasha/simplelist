@@ -26,5 +26,5 @@ return array(
 'button_element'=>'a',
 'button_action_attr'=>'href',
 'lang_filename'=>'simplelist',
-'per_page'=>20
+'per_page'=>2
 );

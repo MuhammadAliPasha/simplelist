@@ -19,7 +19,7 @@
  
 namespace SimpleList\Lib;
 
-class Paginator extends \Laravel\Paginator
+class Paginator extends \Paginator
 {
 	static function paginate(\Laravel\Database\Query $query, $per_page = 20, $columns = array('*'))
 	{
@@ -54,7 +54,53 @@ class Paginator extends \Laravel\Paginator
 		
 		$content = $this->previous(__('simplelist::simplelist.prev')).' '.$links.' '.$this->next(__('simplelist::simplelist.next'));
 
-		return '<div class="pagination">'.$content.'</div>';
+		return '<div class="pagination"><ul>'.$content.'</ul></div>';
+	}
+	
+	protected function range($start, $end)
+	{
+		$pages = array();
+
+		// To generate the range of page links, we will iterate through each page
+		// and, if the current page matches the page, we will generate a span,
+		// otherwise we will generate a link for the page. The span elements
+		// will be assigned the "current" CSS class for convenient styling.
+		for ($page = $start; $page <= $end; $page++)
+		{
+			if ($this->page == $page)
+			{
+				$pages[] = '<li class="current">'.$page.'</li>';
+			}
+			else
+			{
+				$pages[] = '<li>'.$this->link($page, $page, null).'</li>';
+			}
+		}
+
+		return implode(' ', $pages);
+	}
+	
+	protected function element($element, $page, $text, $disabled)
+	{
+		$class = "{$element}_page";
+
+		if (is_null($text))
+		{
+			$text = Lang::line("pagination.{$element}")->get($this->language);
+		}
+
+		// Each consumer of this method provides a "disabled" Closure which can
+		// be used to determine if the element should be a span element or an
+		// actual link. For example, if the current page is the first page,
+		// the "first" element should be a span instead of a link.
+		if ($disabled($this->page, $this->last))
+		{
+			return '<li class="'.$class.' disabled" >'.$text.'</li>';
+		}
+		else
+		{
+			return '<li>'.$this->link($page, $text, $class).'</li>';
+		}
 	}
 	
 
