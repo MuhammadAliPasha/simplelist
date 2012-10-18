@@ -69,7 +69,7 @@ class Paginator extends \Paginator
 		{
 			if ($this->page == $page)
 			{
-				$pages[] = '<li class="current">'.$page.'</li>';
+				$pages[] = '<li class="current"><span>'.$page.'</span></li>';
 			}
 			else
 			{
@@ -95,7 +95,7 @@ class Paginator extends \Paginator
 		// the "first" element should be a span instead of a link.
 		if ($disabled($this->page, $this->last))
 		{
-			return '<li class="'.$class.' disabled" >'.$text.'</li>';
+			return '<li class="'.$class.' disabled" ><span>'.$text.'</span></li>';
 		}
 		else
 		{
