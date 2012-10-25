@@ -138,6 +138,7 @@ class SimpleList{
 	 */
 	static function _columnsParse($columns)
 	{
+		
 		$size=count($columns);
 		$dbcolumns=array();
 		$norcolumns=array();
@@ -149,16 +150,36 @@ class SimpleList{
 					$col=new Column($columns[$i]);
 					$col->parseDb();//remove table names and dots
 					$norcolumns[$col->db]=$col;
-			}else
-				{	
-					if (!$columns[$i]->nodb)
+			}else if (isset($columns[$i]->db))
+			{	
+				if (!$columns[$i]->nodb)
+				{
+					//check is raw set
+					if ($columns[$i]->raw)
 					{
-						$dbcolumns[]=$columns[$i]->db;
-						$columns[$i]->parseDb();//remove table names and dots
+						$dbcolumns[]=$columns[$i]->raw;
 					}
+					else
+						{
+							$dbcolumns[]=$columns[$i]->db;
+						}
 					
-					$norcolumns[$columns[$i]->db]=$columns[$i];
+					//check if it is maybe Db expression
+					if (is_string($columns[$i]->db))
+					$columns[$i]->parseDb();//remove table names and dots
+					
 				}
+				
+				$norcolumns[$columns[$i]->db]=$columns[$i];
+			}else // if is object but no column object it can be Db expression like sum or count
+			{
+					$dbcolumns[]=$columns[$i];
+					
+					$col=new Column((string)$columns[$i]);
+					$col->name=(string)$columns[$i];
+					
+					$norcolumns[(string)$columns[$i]]=$col;
+			}
 		}
 		
 		return array('db'=>$dbcolumns,'norm'=>$norcolumns);

@@ -26,6 +26,8 @@ class Column{
 	
 	public $db;
 	public $content;
+	public $raw;//raw query
+	
 	//@{column} is content value to change
 	/**
 	 * @param $name - column in database
@@ -33,13 +35,14 @@ class Column{
 	 * @param search - if is searched column
 	 * @param $nodb - if true $db param is not in database and is only used for column header
 	 */
-	function __construct($name,$content=false,$search=false,$sort=true,$nodb=false)
+	function __construct($name,$content=false,$search=false,$sort=true,$nodb=false,$raw=false)
 	{
 		$this->orginal_name=$this->parse($name,false);//name used by user and sql
 		$this->db=$name;//this is parsed by parseDb and have only column name without as and dots
 		$this->content=$content;
 		$this->nodb=$nodb;
 		$this->sort=$sort;
+		$this->raw=$raw;
 		
 		$this->search=$search?$search:Search::$COMPARISION_LIKE;
 		
@@ -47,7 +50,7 @@ class Column{
 	
 	static function createByParam(\SimpleList\Column\Param $param)
 	{
-		$obj=new Column($param->name,$param->content,$param->search,$param->sort,$param->nodb);
+		$obj=new Column($param->name,$param->content,$param->search,$param->sort,$param->nodb,$param->raw);
 		return $obj; 
 	}
 	

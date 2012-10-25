@@ -43,4 +43,10 @@ class Param{
 	 */
 	public $nodb=false;
 	
+	/**
+	 * raw query
+	 */
+	public $raw=false;
+	
+	
 }

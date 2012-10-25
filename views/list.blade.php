@@ -5,7 +5,6 @@
 @if (count($rows->results)==0)
 <p class="simplelist_noresults">{{__('simplelist::simplelist.no_results')}}</p>
 @else
-
 {{$rows->links()}}
 <table class="{{$param->table_class}}">	
 <thead>
