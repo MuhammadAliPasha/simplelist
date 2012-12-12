@@ -96,7 +96,7 @@ class Column{
 			if ($row->$name)
 			return $row->$name;
 			else
-				return __(\Simplelist::getParam()->bundle.'::'.\Simplelist::getParam()->lang_filename.'.null');//if no value
+				return __(Simplelist::getParam()->bundle.'::'.Simplelist::getParam()->lang_filename.'.null');//if no value
 			
 			}		
 					
