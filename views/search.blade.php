@@ -25,7 +25,7 @@
 	@endif
 	
 	<span class="{{$param->span_class}}">
-		<input type="submit" value="{{__('simplelist::simplelist.search')}}" />
+		<input type="submit" class="{{Config::get('simplelist::simplelist.button_class')}}" value="{{__('simplelist::simplelist.search')}}" />
 	</span>
 </form>
 </div>
