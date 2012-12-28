@@ -95,7 +95,7 @@ class SimpleList{
 				 
 			}
 
-		$rows = Paginator::paginate($param->query,$param->per_page,$param->dbcolumns);
+		$rows = Paginator::paginate($param->query,$param->per_page,$param->dbcolumns,$param->url_def);
 		self::setUrlAppends($param, $rows);
 		
 		return $rows;

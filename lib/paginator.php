@@ -21,7 +21,9 @@ namespace SimpleList\Lib;
 
 class Paginator extends \Paginator
 {
-	static function paginate(\Laravel\Database\Query $query, $per_page = 20, $columns = array('*'))
+	protected $url_def;
+	
+	static function paginate(\Laravel\Database\Query $query, $per_page = 20, $columns = array('*'), $url_def=false)
 	{
 		
 		list($orderings, $query->orderings) = array($query->orderings, null);
@@ -34,7 +36,10 @@ class Paginator extends \Paginator
 
 		$results = $query->for_page($page, $per_page)->get($columns);
 
-		return Paginator::make($results, $total, $per_page);
+		$objpag = Paginator::make($results, $total, $per_page);
+		$objpag->url_def = $url_def;
+		
+		return $objpag;
 	}
 	
 	public function links($adjacent = 3)
@@ -103,5 +108,14 @@ class Paginator extends \Paginator
 		}
 	}
 	
+	protected function link($page, $text, $class)
+	{
+		if($this->url_def==false) {
+			return parent::link($page, $text, $class);
+		}
+		
+		$query = '?page='.$page.$this->appendage($this->appends);
 
+		return '<li'.\Laravel\HTML::attributes(array('class' => $class)).'>'. \Laravel\HTML::link($this->url_def.$query, $text, array(), \Laravel\Request::secure()).'</li>';
+	}
 }

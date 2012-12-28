@@ -38,6 +38,7 @@ class Param{
 	public $span_class;
 	public $td_class;
 	public $url_appends=array();//parameters to append to url
+	public $url_def=false;//Change url before ?
 	
 	
 	public $extended_columns=array();//columns not existing on list but existing in query
