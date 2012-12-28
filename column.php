@@ -59,6 +59,18 @@ class Column{
 	{
 		$this->db=$this->parse($this->db);
 	}
+	
+	
+	private function getOrginalName($name)
+	{
+		$pos_as=strpos($name,'as');
+		
+		if ($pos_as===false)
+		return $this->parse($name);
+		else
+			return $this->parse(substr($name,0,$pos_as),false);
+	}
+	
 	/**
 	 * removes dots and as words, gets only column names
 	 */
@@ -80,7 +92,17 @@ class Column{
 		}else
 			{
 				//we have alias so we get only column without table name
-				return substr($column, $pos_as+3);
+				$alias=substr($column, $pos_as+3);
+				
+				if (SimpleList::$sort_by==$alias)
+				{
+					//we have this alias in sort so we change sort to orginal name
+					SimpleList::$sort_by=substr($column, 0, $pos_as-1);
+					SimpleList::$sort_by_alias=true;
+				}
+				
+				return $alias;
+				
 			}
 		
 		return $column;

@@ -33,7 +33,8 @@ class SimpleList{
 	
 	static $sorttypes=array('desc','asc');
 	static $param=false;
-	
+	static $sort_by=false;
+	static $sort_by_alias=false;
 	
 	static function getParam()
 	{
@@ -56,6 +57,8 @@ class SimpleList{
 	{
 		
 		static::$param=$param;//set Param
+		static::$sort_by=Input::get('sort');
+		
 		
 		if (count($param->columns)==0)
 		throw new Exception ('No columns defined!');
@@ -71,13 +74,13 @@ class SimpleList{
 			$param->search->run();
 		}
 		
-		if (Input::get('sort'))
+		if (static::$sort_by)
 		{
 			//is sorted
 			$param->sorted_type=(Input::get('sorttype')==self::$sorttypes[0])?self::$sorttypes[0]:self::$sorttypes[1];
 			
-			if (in_array(Input::get('sort'), $param->dbcolumns) && in_array($param->sorted_type,self::$sorttypes))
-			$param->query->order_by(Input::get('sort'),$param->sorted_type);
+			if ( ( in_array(static::$sort_by, $param->dbcolumns) || static::$sort_by_alias) && in_array($param->sorted_type,self::$sorttypes))
+			$param->query->order_by(static::$sort_by,$param->sorted_type);
 			
 			$param->sorted_type=($param->sorted_type==self::$sorttypes[0])?self::$sorttypes[1]:self::$sorttypes[0];
 			$param->sorted_now=Input::get('sort');
