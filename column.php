@@ -76,8 +76,8 @@ class Column{
 	 */
 	private function parse($column ,$dot=true)
 	{
-		$pos_as=strpos($column,'as');
-		
+		$pos_as=strpos($column,' as ');
+
 		if ($pos_as===false)//no as in name
 		{
 			if ($dot)//remove table name before .
@@ -92,12 +92,12 @@ class Column{
 		}else
 			{
 				//we have alias so we get only column without table name
-				$alias=substr($column, $pos_as+3);
+				$alias=substr($column, $pos_as+4);
 				
 				if (SimpleList::$sort_by==$alias)
 				{
 					//we have this alias in sort so we change sort to orginal name
-					SimpleList::$sort_by=substr($column, 0, $pos_as-1);
+					SimpleList::$sort_by=substr($column, 0, $pos_as);
 					SimpleList::$sort_by_alias=true;
 				}
 				
