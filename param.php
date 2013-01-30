@@ -46,6 +46,28 @@ class Param{
 	
 	public $search_class;
 	
+	
+	public $methods=array('row'=>false,'column'=>false);
+	
+	/**
+	 * Set method to use in every tr. Methods gets in parameter
+	 * current $row so You can check varaiables and set tr attributes like class or id
+	 */
+	public function setRowMethod($method)
+	{
+		$this->methods['row']=$method;
+	}
+	
+	/**
+	 * Set method to use in every td. Methods gets in parameter
+	 * current column name so You can check varaiables and set td attributes like class or id
+	 */
+	public function setColumnMethod($method)
+	{
+		$this->methods['column']=$method;
+	}
+	
+	
 	public function __construct()
 	{
 		$this->table_class=Config::get('simplelist::simplelist.table_class');

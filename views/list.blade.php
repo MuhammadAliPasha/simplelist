@@ -28,9 +28,16 @@
     	@endif
 </thead>	
 @foreach ($rows->results as $row)
-    <tr>
+    <tr @if ($param->methods['row']) 
+    	{{$param->methods['row']($row)}}  
+    	@endif
+    >
     	@foreach ($param->columns as $column)
-    	<td class="{{$param->td_class}}">
+    	<td class="{{$param->td_class}}"
+    		 @if ($param->methods['column'])
+    		 {{$param->methods['column']($column->db)}}  
+    		 @endif
+    	>
     		<span class="{{$param->span_class}}">{{$column->generateContent($row)}}</span>
     	</td>
     	@endforeach
