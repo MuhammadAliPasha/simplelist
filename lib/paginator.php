@@ -19,7 +19,7 @@
  
 namespace SimpleList\Lib;
 
-class Paginator extends \Paginator
+class Paginator extends \Laravel\Paginator
 {
 	protected $url_def;
 	
