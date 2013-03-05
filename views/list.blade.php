@@ -17,6 +17,9 @@
     		@endif
     		<span>{{__($param->bundle.'::'.$param->lang_filename.'.'.$column->orginal_name)}}</span>
     		@if ($param->sort && $column->sort)
+    		@if ($param->sorted_now==$column->orginal_name)
+    				<i class='{{$param->sorted_type}}'></i>
+    		@endif
     		</a>
     		@endif
     	</th>
