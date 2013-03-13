@@ -16,14 +16,19 @@
  * @copyright  (c) 2012, BossByte Maciej Sikora
  * @link       http://www.bossbyte.com
  */
-return array(
-'prev'=>'Poprzednia',
-'next'=>'Następna',
-'edit'=>"Edycja",
-'delete'=>"Usuń",
-'search'=>"Szukaj",
-'no_results'=>'Brak wyników',
-'options'=>'Opcje',
-'null'=>'Brak wartości',
-'activate'=>'Włącz/Wyłącz',
-);
+ 
+namespace SimpleList\Buttons;
+use Config;
+use URI;
+
+class Custom extends Button{
+	
+	function __construct($controller, $method)
+	{
+		$this->method=$method;
+		parent::__construct($controller);
+		
+	}
+	
+	
+}
